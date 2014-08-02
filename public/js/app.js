@@ -60,4 +60,16 @@ function App($scope) {
 
     $scope.selectedOperator = $scope.operatorList[4];
 
+    $scope.showNextOperator = function() {
+        if (screen.width < 760){
+            var index = $scope.operatorList.indexOf($scope.selectedOperator);
+            if (index === ($scope.operatorList.length - 1)) {
+                $scope.selectedOperator = $scope.operatorList[0];
+            }
+            else {
+                $scope.selectedOperator = $scope.operatorList[index+1];
+            }
+        }
+    };
+
 }

@@ -78,8 +78,7 @@
 }
 
 .operator {
-    font-size: 150pt;
-    font-stretch: 20%;
+    font-size: 160pt;
     text-align: center;
     font-family: 'Inconsolata';
 }
@@ -101,7 +100,7 @@
 
 .work_by a {
     position: fixed;
-    bottom: 10px;
+    bottom: 2px;
     right: 10px;
     color: #ddd;
     z-index: 1000;
