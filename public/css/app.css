@@ -12,7 +12,6 @@
     display:none;
 }
 
-
 @media (min-width: 768px) {
     .sidebar {
         position: fixed;
@@ -85,12 +84,16 @@
     padding: 10%;
 }
 
+.operator_mini {
+    font-size:0.6em;
+    font-family: 'Inconsolata';
+    color: #999;
+}
 .operator {
     font-size: 160pt;
     text-align: center;
     font-family: 'Inconsolata';
 }
-
 .operator_name {
     color: #9B111E;
     font-size: 24px;
