@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+  <head>
+    <title></title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Ruby operators" />
+    <meta name="author" content="Anil Wadghule" />
+
+    <script src="js/angular.min.js"></script>
+    <script src="js/app.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/app.css">
+    <link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
+  </head>
+  <body ng-app>
+
+    <div class="container-fluid" ng-controller="App">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul  ng:repeat="operator in operatorList" class="nav nav-sidebar">
+            <li ng:click="select(operator)" ng-class="navClass(operator)" >{{operator.name}}</li>
+          </ul>
+
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header">Ruby Operators</h1>
+          <div class="wrapper">
+            <div class="operator">{{selectedOperator.symbol}}</div>
+            <div class="operator_name">
+              {{selectedOperator.name}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="work_by">
+        <a href="http://twitter.com/anildigital">@anildigital</a>
+      </div>
+    </div>
+
+  </body>
+</html>
