@@ -41,11 +41,17 @@
     padding-right: 20px;
 /* padding-left: 20px; */
 }
-.nav-sidebar > .active > a,
-.nav-sidebar > .active > a:hover,
-.nav-sidebar > .active > a:focus {
+
+.nav-sidebar > li:hover {
+    background-color: #ccc;
+    color: #000;
+}
+
+.nav-sidebar > .active,
+.nav-sidebar > .active:hover,
+.nav-sidebar > .active:focus {
+    background: #9B111E;
     color: #fff;
-    background-color: #428bca;
 }
 
 
@@ -80,7 +86,12 @@
 
 .operator_name {
     color: #9B111E;
-    font-size: 16px;
+    font-size: 24px;
+}
+
+.operator_name:hover {
+    font-weight: bold;
+    text-shadow: 1px 1px #ddd;
 }
 
 .active {
