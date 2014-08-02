@@ -44,5 +44,7 @@
     {"name": "whack",
      "symbol": "/"},
     {"name": "blank",
-     "symbol": "_"} ]
+     "symbol": "_"},
+    {"name": "t-square",
+     "symbol": "||="} ]
 }
