@@ -79,6 +79,11 @@
     margin-top: 0;
 }
 
+pre {
+    background-color: #fff;
+    font-family: 'Inconsolata';
+}
+
 .wrapper{ 
     background-color: #f5f5f5;
     padding: 10%;
@@ -90,10 +95,17 @@
     color: #999;
 }
 .operator {
-    font-size: 160pt;
+    font-size: 100pt;
     text-align: center;
     font-family: 'Inconsolata';
 }
+
+@media (min-width: 768px) {
+    .operator {
+        font-size: 160pt;
+    }
+}
+
 .operator_name {
     color: #9B111E;
     font-size: 24px;
@@ -101,7 +113,6 @@
 
 .operator_name:hover {
     font-weight: bold;
-    text-shadow: 1px 1px #ddd;
 }
 
 .active {
