@@ -29,4 +29,11 @@ function App($scope, $http) {
         }
     };
 
+    $scope.$watch(function() {
+      return document.getElementById("code_example");
+    },
+    function() {
+      hljs.highlightBlock(document.getElementById("code_example"));
+    });
+
 }
