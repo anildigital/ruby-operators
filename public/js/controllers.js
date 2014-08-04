@@ -2,6 +2,8 @@ var rubyOperatorsAppControllers = angular.module("rubyOperatorsAppControllers", 
 
 rubyOperatorsAppControllers.controller("RubyOperatorListCtrl", ['$scope', '$routeParams', '$location', '$http', 'Operators', function($scope, $routeParams, $location, $http, Operators) {
 
+    $scope.operatorList = [];
+
     $scope.select = function(selectedOperator) {
         $location.path(selectedOperator.name);
     };
