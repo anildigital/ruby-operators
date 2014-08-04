@@ -5,7 +5,7 @@ rubyOperatorsAppControllers.controller("RubyOperatorListCtrl", ['$scope', '$rout
     $scope.operatorList = [];
 
     $scope.select = function(selectedOperator) {
-        $location.path(selectedOperator.name);
+        $location.path(selectedOperator.name.split(' ').join('-'));
     };
 
     Operators.get().success(function(data){
@@ -25,7 +25,7 @@ rubyOperatorsAppControllers.controller("SingleRubyOperatorCtrl", ['$scope', '$ro
     var selectedOperator = null;
     $scope.$parent.operatorList.forEach(function(operator) {
 
-        if (operator.name === $routeParams.operatorName){
+        if (operator.name.split(' ').join('-') === $routeParams.operatorName){
             selectedOperator = operator;
         }
     });
