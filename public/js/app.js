@@ -1,7 +1,7 @@
 var RubyOperatorsApp = angular.module('RubyOperatorsApp', [
     'ngRoute',
-    'rubyOperatorsAppControllers',
-    'rubyOperatorsAppServices'
+    'rubyOperatorsControllers',
+    'rubyOperatorsServices'
 ]);
 
 RubyOperatorsApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
@@ -9,7 +9,12 @@ RubyOperatorsApp.config(['$routeProvider', '$locationProvider', function($routeP
     $routeProvider.
         when('/:operatorName', {
             templateUrl: 'app.html',
-            controller: 'SingleRubyOperatorCtrl'
+            controller: 'SingleRubyOperatorCtrl',
+            resolve: {
+                operatorList: function(Operators) {
+                    return Operators.get();
+                }
+            }
         }).otherwise({
             redirectTo: '/spaceship'
         });
