@@ -13,6 +13,8 @@
      "symbol": "@"},
     {"name": "splat",
      "symbol": "*"},
+    {"name": "starargs",
+     "symbol": "*args"},
     {"name": "tilde",
      "symbol": "~"},
     {"name": "octothorpe",
