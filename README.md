@@ -18,4 +18,4 @@ run
 
 Contribute
 ==========
-Edit [operators.json](https://github.com/anildigital/ruby-operators/blob/master/app/assets/config/operators.json) and send pull request.
+Edit [operators.json](https://github.com/anildigital/ruby-operators/blob/master/app/config/operators.json) and send pull request.
