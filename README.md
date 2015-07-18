@@ -10,7 +10,7 @@ run
   webpack-dev-server --config webpack.config.js
 ```
 
-### Generate proudction build
+### Generate production build
 ```
   webpack --config webpack.production.config.js
 ```
