@@ -4,7 +4,7 @@
   "description": "Simple app to show different Ruby operators with their funny names.",
   "main": "app/app.jsx",
   "scripts": {
-    "start": "webpack-dev-serve --config webpack.config.js"
+    "start": "serve -p $PORT"
   },
   "author": "Anil Wadghule",
   "license": "MIT",
@@ -24,6 +24,7 @@
     "react": "^0.13.3",
     "react-highlight": "^0.5.0",
     "react-router": "^0.13.3",
+    "serve": "^1.4.0",
     "style-loader": "^0.12.3"
   }
 }
