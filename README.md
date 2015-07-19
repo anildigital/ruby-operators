@@ -20,7 +20,7 @@ webpack --config webpack.production.config.js
 
 Contribute
 ==========
-Edit [operators.json](https://github.com/anildigital/ruby-operators/blob/master/app/config/operators.json) and send pull request.
+Edit [operators.js](https://github.com/anildigital/ruby-operators/blob/master/app/config/operators.js) and send pull request.
 
 
 [travis-image]: https://api.travis-ci.org/anildigital/ruby-operators.svg?branch=master
