@@ -24,4 +24,4 @@ Edit [operators.js](https://github.com/anildigital/ruby-operators/blob/master/ap
 
 
 [travis-image]: https://api.travis-ci.org/anildigital/ruby-operators.svg?branch=master
-[travis-url]: https://travis-ci.org/anildigital/ruby-operator
+[travis-url]: https://travis-ci.org/anildigital/ruby-operators
