@@ -4,27 +4,28 @@
   "description": "Simple app to show different Ruby operators with their funny names.",
   "main": "app/app.jsx",
   "scripts": {
-    "start": "webpack --config webpack.production.config.js && serve -p $PORT"
+    "start": "serve -p $PORT",
+    "postinstall": "node deploy"
   },
   "author": "Anil Wadghule",
   "license": "MIT",
   "devDependencies": {
     "babel-core": "^5.7.4",
-    "babel-loader": "^5.3.2",
     "file-loader": "^0.8.4",
     "node-libs-browser": "^0.5.2",
-    "react-hot-loader": "^1.2.8",
-    "url-loader": "^0.5.6",
-    "webpack": "^1.10.1"
+    "react-hot-loader": "^1.2.8"
   },
   "dependencies": {
-    "css-loader": "^0.15.4",
+    "babel-loader": "^5.3.2",
+    "css-loader": "^0.15.5",
     "highlight.js": "^8.6.0",
     "jquery": "^2.1.4",
     "react": "^0.13.3",
     "react-highlight": "^0.5.0",
     "react-router": "^0.13.3",
     "serve": "^1.4.0",
-    "style-loader": "^0.12.3"
+    "style-loader": "^0.12.3",
+    "url-loader": "^0.5.6",
+    "webpack": "^1.10.1"
   }
 }

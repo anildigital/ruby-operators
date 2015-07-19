@@ -22,7 +22,7 @@ module.exports = {
             },
             {
                 test: /\.jsx$/,
-                loaders: ["react-hot", "babel-loader"]
+                loaders: ["babel-loader"]
             },
             {
                 test: /\.(png|woff|woff2|eot|ttf|svg)$/,
