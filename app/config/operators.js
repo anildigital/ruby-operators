@@ -102,6 +102,7 @@ module.exports = [
     },
     {
         "name": "t-square",
-        "symbol": "||="
+        "symbol": "||=",
+        "example": "# test for nil; if yes, then initialize to a custom value\ndef fake_add_arrays(ary_a, ary_b)\n  first = ary_a ||= []\n  second = ary_b ||= []\n  first + second\nend\n\nx = nil\nfake_add_arrays(x, [1, 2])\n# => [1, 2]\ny = nil\nfake_add_arrays([2, 6, 10], y)\n# => [2, 6, 10]\nfake_add_arrays([7, 9], [8, 3])\n# => [7, 9, 8, 3]"
     }
 ];
