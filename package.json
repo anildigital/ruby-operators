@@ -5,6 +5,7 @@
   "main": "app/app.jsx",
   "scripts": {
     "start": "serve -p $PORT",
+    "postinstall": "node deploy",
     "test": "jest"
   },
   "author": "Anil Wadghule",

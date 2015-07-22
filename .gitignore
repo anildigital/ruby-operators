@@ -1,5 +1,5 @@
 .tern-port
-*.svg
 node_modules
 build
 npm-debug.log
+bundle.js
