@@ -1,7 +1,8 @@
 module.exports = [
     {
         "name": "hashrocket",
-        "symbol": "=>"
+        "symbol": "=>",
+        "example": "# pre-Ruby 1.9 syntax for assigning values to keys in a map\nx = { :a => 'foo', :b => 'bar' }\n# => {:a=>\"foo\", :b=>\"bar\"}\n\n# This is now the same as (using ':' instead of '=>')\nx = { a: 'foo', b: 'bar' }\n# => {:a=>\"foo\", :b=>\"bar\"}"
     },
     {
         "name": "spaceship",
