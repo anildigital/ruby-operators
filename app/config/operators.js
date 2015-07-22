@@ -72,7 +72,8 @@ module.exports = [
     },
     {
         "name": "shovel",
-        "symbol": "<<"
+        "symbol": "<<",
+        "example": "# see operator overloading of << for 'container' objects built up repeatedly with 'contents'\nclass Train\n  attr_reader :name, :list_of_coaches\n\n  def initialize(name)\n    @name = name\n    @list_of_coaches = []\n  end\n\n  def <<(coach)\n    @list_of_coaches << coach\n    self\n  end\n\n  def to_s\n    \"#{name} with coaches: #{list_of_coaches.join(', ')}\"\n  end\n\nend\n\nclass Coach\n  attr_reader :name\n\n  def initialize(name)\n    @name = name;\n  end\n\n  def to_s\n    name\n  end\n\nend\n\n\nfirst_class = Coach.new(\"A-1\")\nsleeper_car_one = Coach.new(\"S-1\")\ncatering_car = Coach.new(\"CR\")\nsleeper_car_two = Coach.new(\"S-2\")\nbrake_van = Coach.new(\"BV\")\n\nexpress = Train.new(\"Orient Express\")\nexpress << first_class << sleeper_car_one << catering_car << sleeper_car_two << brake_van\n\np express\n# => Orient Express with coaches: A-1, S-1, CR, S-2, BV"
     },
     {
         "name": "constellation",
