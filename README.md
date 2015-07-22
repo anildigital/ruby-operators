@@ -4,7 +4,14 @@ ruby-operators
 ==============
 Simple app to show different Ruby operators with their funny names.
 
-run
+
+Prerequisites
+===
+- node
+- webpack-dev-server (Install with `npm install -g webpack-dev-server`)
+- webpack (Install with `npm install -g webpack`)
+
+Run
 ===
 
 ### Run in development mode
@@ -12,11 +19,14 @@ run
 webpack-dev-server --config webpack.config.js
 ```
 
+Runs dev webserver at http://localhost:8080/webpack-dev-server/
+
 ### Generate production build
 ```
 webpack --config webpack.production.config.js
 ```
 
+Serve project under a webserver
 
 Contribute
 ==========
