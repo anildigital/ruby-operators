@@ -89,7 +89,8 @@ module.exports = [
     },
     {
         "name": "pretzel",
-        "symbol": "&"
+        "symbol": "&",
+        "example": "# post-Ruby 1.9 example of & to invoke #to_proc on an object in a closure\nclass FakeRomanNumeral\n  attr_reader :numeral\n\n  def initialize(numeral_str)\n    @numeral = numeral_str\n  end\n\n  def to_i\n    numeral.eql?('X') ? 10 : numeral.eql?('V') ? 5 : 0  # and more ...\n  end\n\nend\n\nten = FakeRomanNumeral.new('X'); five = FakeRomanNumeral.new('V')\nroman_numerals = [ten, five]\narabic_numerals = roman_numerals.map(&:to_i)\np arabic_numerals\n# => [10, 5]"
     },
     {
         "name": "whack",
@@ -101,6 +102,7 @@ module.exports = [
     },
     {
         "name": "t-square",
-        "symbol": "||="
+        "symbol": "||=",
+        "example": "# test for nil; if yes, then initialize to a custom value\ndef fake_add_arrays(ary_a, ary_b)\n  first = ary_a ||= []\n  second = ary_b ||= []\n  first + second\nend\n\nx = nil\nfake_add_arrays(x, [1, 2])\n# => [1, 2]\ny = nil\nfake_add_arrays([2, 6, 10], y)\n# => [2, 6, 10]\nfake_add_arrays([7, 9], [8, 3])\n# => [7, 9, 8, 3]"
     }
 ];
