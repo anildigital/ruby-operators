@@ -6,7 +6,8 @@ module.exports = [
     },
     {
         "name": "spaceship",
-        "symbol": "<=>"
+        "symbol": "<=>",
+        "example": "# Compares two objects, mostly used to implement the Comparable module.\nclass Exam\n  include Comparable\n\n  def <=>(other)\n    self.score <=> other.score\n  end\nend\n\n> Exam.new(score: 100) > Exam.new(score: 50)\ntrue\n> [ Exam.new(score: 60), Exam.new(score: 10), Exam.new(score: 30) ].sort\n[<Exam score: 10>, <Exam score: 30>, <Exam score: 60>]\n"
     },
     {
         "name": "threequals",
