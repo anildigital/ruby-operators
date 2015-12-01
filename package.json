@@ -21,13 +21,15 @@
     "react-hot-loader": "^1.2.8",
     "style-loader": "^0.12.3",
     "url-loader": "^0.5.6",
-    "webpack": "^1.10.1"
+    "webpack": "^1.10.1",
+    "memory-fs": "^0.3.0"
   },
   "dependencies": {
     "babel-loader": "^5.3.2",
     "css-loader": "^0.15.5",
     "highlight.js": "^8.6.0",
     "jquery": "^2.1.4",
+    "memory-fs": "^0.3.0",
     "react": "^0.13.3",
     "react-highlight": "^0.5.0",
     "react-router": "^0.13.3",
