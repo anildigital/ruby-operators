@@ -13,6 +13,7 @@ module.exports = {
     },
 
     module: {
+        noParse: [/autoit.js/],
         loaders: [
             {
                 test: /\.css$/,
