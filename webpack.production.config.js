@@ -26,8 +26,8 @@ module.exports = {
                 loaders: ["babel-loader"]
             },
             {
-                test:  /.(png|woff(2)?|eot|ttf|svg)(\?[a-z0-9=\.]+)?$/,
-                loader: ['url-loader?limit=100000']
+                test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+                loader: 'url-loader?limit=100000'
             }
         ]
     },
