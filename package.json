@@ -2,6 +2,9 @@
   "name": "ruby-operators",
   "version": "0.0.7",
   "description": "Simple app to show different Ruby operators with their funny names.",
+  "engines": {
+    "node": "5.0.0"
+  },
   "main": "app/app.jsx",
   "scripts": {
     "start": "serve -p $PORT",
