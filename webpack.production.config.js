@@ -15,7 +15,7 @@ module.exports = {
     },
 
     module: {
-        noParse: [/autoit.js/],        
+        noParse: [/autoit.js/],
         loaders: [
             {
                 test: /\.css$/,
@@ -26,7 +26,7 @@ module.exports = {
                 loaders: ["babel-loader"]
             },
             {
-                test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+                test:  /.(png|woff(2)?|eot|ttf|svg)(\?[a-z0-9=\.]+)?$/,
                 loader: 'url-loader?limit=100000'
             }
         ]
