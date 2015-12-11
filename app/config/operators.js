@@ -108,7 +108,7 @@ module.exports = [
         "example": "# test for nil; if yes, then initialize to a custom value\ndef fake_add_arrays(ary_a, ary_b)\n  first = ary_a ||= []\n  second = ary_b ||= []\n  first + second\nend\n\nx = nil\nfake_add_arrays(x, [1, 2])\n# => [1, 2]\ny = nil\nfake_add_arrays([2, 6, 10], y)\n# => [2, 6, 10]\nfake_add_arrays([7, 9], [8, 3])\n# => [7, 9, 8, 3]"
     },
     {
-        "name": "snail",
+        "name": "Lonely",
         "symbol": "&.",
         "example": "# Safe-navigation operator (introduced in Ruby 2.3)\n\n# Assuming `profile` is `nil`\n\n# Problem\nuser.profile.image\n# => 'NoMethodError: undefined method `image' for nil:NilClass' \n\n# Guard chaining\nuser && user.profile && user.profile.image\n# => nil\n\n# Ruby 2.3+\nuser&.profile&.image\n# => nil\n\n# Rails\nuser.try(:profile).try(:image)\n# => nil"
     }
