@@ -11,7 +11,8 @@ module.exports = [
     },
     {
         "name": "threequals",
-        "symbol": "==="
+        "symbol": "===",
+        "example": "# Case match\nclass Icecream\n  attr_accessor :flavour\n\n  def initialize(flavour)\n    @flavour = flavour\n  end\n\n  def ===(another_icecream)\n    @flavour == another_icecream.flavour\n  end\nend\n\nvanilla_icecream = Icecream.new 'vanilla'\n\ncase vanilla_icecream\nwhen (Icecream.new 'chocolate')\n  puts \"Yikes!\"\nwhen (Icecream.new 'cookies and cream')\n  puts \"Yikes!\"\nwhen (Icecream.new 'vanilla')\n  puts \"Yiiiiis!\"\nend\n# => \"Yiiiiis!\""
     },
     {
         "name": "twiddle wakka",
