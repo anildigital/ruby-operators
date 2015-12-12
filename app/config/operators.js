@@ -83,7 +83,8 @@ module.exports = [
     },
     {
         "name": "equalike",
-        "symbol": "=~"
+        "symbol": "=~",
+        "example": "# Pattern match\n# Used in String to match a Regular Expression\n> \"hello world\" =~ /hello/\n0\n> \"hello world\" =~ /hi/\nnil\n\n# Also used in Regexp to match a string\n> /hello/ =~ \"hello world\"\n0\n> /hello/ =~ \"bacon\"\nnil\n"
     },
     {
         "name": "hat",
