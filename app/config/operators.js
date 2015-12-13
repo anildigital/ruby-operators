@@ -11,7 +11,8 @@ module.exports = [
     },
     {
         "name": "threequals",
-        "symbol": "==="
+        "symbol": "===",
+        "example": "# Case match\nclass Icecream\n  attr_accessor :flavour\n\n  def initialize(flavour)\n    @flavour = flavour\n  end\n\n  def ===(another_icecream)\n    @flavour == another_icecream.flavour\n  end\nend\n\nvanilla_icecream = Icecream.new 'vanilla'\n\ncase vanilla_icecream\nwhen (Icecream.new 'chocolate')\n  puts \"Yikes!\"\nwhen (Icecream.new 'cookies and cream')\n  puts \"Yikes!\"\nwhen (Icecream.new 'vanilla')\n  puts \"Yiiiiis!\"\nend\n# => \"Yiiiiis!\""
     },
     {
         "name": "twiddle wakka",
@@ -83,7 +84,8 @@ module.exports = [
     },
     {
         "name": "equalike",
-        "symbol": "=~"
+        "symbol": "=~",
+        "example": "# Pattern matching\n# Used in String to match a Regular Expression (Regexp)\n\"hello world\" =~ /hello/\n# => 0\n\"hello world\" =~ /bacon/\n# => nil\n\n# Also used in Regexp to match a String\n/hello/ =~ \"hello world\"\n# => 0\n/bacon/ =~ \"hello world\"\n# => nil\n"
     },
     {
         "name": "hat",
