@@ -1,7 +1,8 @@
 import jQuery from "jquery";
 import React from "react";
-import Router from "react-router";
-import { DefaultRoute, Route, RouteHandler, Redirect } from "react-router";
+
+import { render } from 'react-dom'
+import { DefaultRoute, Router, Route, RouteHandler, Redirect, IndexRoute } from "react-router";
 
 window.jQuery = jQuery;
 
@@ -17,18 +18,19 @@ import Home from "./home";
 var App = React.createClass({
     render: function() {
         return (
-            <RouteHandler/>
+            <div>
+              {this.props.children}
+            </div>
         );
     }
 });
 
-var routes = (
-    <Route handler={App} path="/">
-        <Redirect from="/" to="/spaceship" params={{operator: "spaceship"}} />
-        <Route path="/:operator" handler={Home} />
-    </Route>
-);
-
-Router.run(routes, Router.HashLocation, function (Handler) {
-    React.render(<Handler/>, document.getElementById("container"));
-});
+render((
+    <Router>
+      <Route path="/" component={App}>
+        <Redirect to="/spaceship" />
+        <Route path="/:operator" component={Home} />
+        <IndexRoute component={Home} />
+      </Route>
+    </Router>
+), document.getElementById("container"))
