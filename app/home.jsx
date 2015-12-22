@@ -6,6 +6,7 @@ var Highlight = require('react-highlight');
 var Home = React.createClass({
 
     getInitialState: function() {
+        console.log("Came here");
         var self = this;
         var operator = operators.filter(function(o) {
             return (o.name.split(' ').join('-') === self.props.params.operator);

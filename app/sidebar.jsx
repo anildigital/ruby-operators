@@ -12,7 +12,7 @@ var Sidebar = React.createClass({
 
     displayOperator: function(operator) {
         return(
-            <li className={this.isOperatorSelected(operator)} onClick={this.props.selectOperator.bind(this, operator)}>
+            <li className={this.isOperatorSelected(operator)} onClick={this.props.selectOperator.bind(null, operator)}>
                 {operator.name}&nbsp;
                 <span className="operator_mini">
                     {operator.symbol}
