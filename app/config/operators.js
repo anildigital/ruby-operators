@@ -31,7 +31,7 @@ module.exports = [
         "symbol": "*"
     },
     {
-        "name": "starargs",
+        "name": "stargs",
         "symbol": "*args"
     },
     {
