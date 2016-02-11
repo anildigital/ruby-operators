@@ -113,5 +113,10 @@ module.exports = [
         "name": "lonely",
         "symbol": "&.",
         "example": "# Safe-navigation operator (introduced in Ruby 2.3)\n\n# Assuming `profile` is `nil`\n\n# Problem\nuser.profile.image\n# => 'NoMethodError: undefined method `image' for nil:NilClass' \n\n# Guard chaining\nuser && user.profile && user.profile.image\n# => nil\n\n# Ruby 2.3+\nuser&.profile&.image\n# => nil\n\n# Rails\nuser.try(:profile).try(:image)\n# => nil"
+    },
+    {
+        "name": "squiggly heredoc",
+        "symbol": "<<~",
+        "example": "# Normal heredoc\ndef warning_message\n  <<-HEREDOC\nSubscription expiring soon!\nYour free trial will expire in #{days_until_expiration} days.\nPlease update your billing information.\n  HEREDOC\nend\n\n# Squiggly heredoc, introduced in Ruby 2.3 (indentation is removed)\ndef warning_message\n  <<~HEREDOC\n    Subscription expiring soon!\n    Your free trial will expire in #{days_until_expiration} days.\n    Please update your billing information.\n  HEREDOC\nend"
     }
 ];
