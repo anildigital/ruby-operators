@@ -1,7 +1,8 @@
 import React from "react";
+import { hashHistory } from 'react-router'
 import Sidebar from "./sidebar";
 import operators from "./config/operators";
-var Highlight = require('react-highlight');
+import Highlight from 'react-highlight';
 
 var Home = React.createClass({
 
@@ -48,20 +49,25 @@ var Home = React.createClass({
         } else {
             nextIndex = this.state.currentIndex + 1;
         }
-        window.location.href = "/#/" + this.state.operators[nextIndex].name.split(' ').join('-');
+        hashHistory.push(this.state.operators[nextIndex].name.split(' ').join('-'))
     },
 
     selectOperator: function(operator) {
-        window.location.href =  "/#/" + operator.name.split(' ').join('-');
+        hashHistory.push(operator.name.split(' ').join('-'))
     },
 
     render: function() {
         return (
             <div className="row" >
-                <Sidebar getCurrentOperator={this.getCurrentOperator} selectOperator={this.selectOperator} operators={this.state.operators} />
+                <Sidebar
+                    getCurrentOperator={this.getCurrentOperator}
+                    selectOperator={this.selectOperator}
+                    operators={this.state.operators} />
                 <div className="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                     <Header />
-                    <Operator showNextOperator={this.showNextOperator} currentOperator={this.getCurrentOperator()} />
+                    <Operator
+                        showNextOperator={this.showNextOperator}
+                        currentOperator={this.getCurrentOperator()} />
                 </div>
             </div>
         );
@@ -71,7 +77,9 @@ var Home = React.createClass({
 var Header = React.createClass({
     render: function() {
         return (
-            <h1 className="page-header">Ruby Operators</h1>
+            <h1 className="page-header">
+                Ruby Operators
+            </h1>
         );
     }
 });
@@ -80,7 +88,9 @@ var Operator = React.createClass({
     render: function() {
         return (
             <div className="wrapper">
-                <div className="operator" onClick={this.props.showNextOperator}>
+                <div
+                    className="operator"
+                    onClick={this.props.showNextOperator}>
                     {this.props.currentOperator.symbol}
                 </div>
                 <div className="operator_name">
@@ -102,7 +112,8 @@ var OperatorExampleCodeSnippet = React.createClass({
             )
         } else {
             return (
-                <span></span>
+                <span>
+                </span>
             )
         }
     }
