@@ -2,7 +2,7 @@ import jQuery from "jquery";
 import React from "react";
 
 import { render } from 'react-dom'
-import { DefaultRoute, Router, Route, RouteHandler, Redirect, IndexRoute } from "react-router";
+import { DefaultRoute, Router, Route, RouteHandler, IndexRedirect, hashHistory } from "react-router";
 
 window.jQuery = jQuery;
 
@@ -26,11 +26,10 @@ var App = React.createClass({
 });
 
 render((
-    <Router>
+    <Router history={hashHistory}>
       <Route path="/" component={App}>
-        <Redirect to="/spaceship" />
         <Route path="/:operator" component={Home} />
-        <IndexRoute component={Home} />
+        <IndexRedirect to="/spaceship" />
       </Route>
     </Router>
 ), document.getElementById("container"))
