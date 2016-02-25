@@ -7,9 +7,8 @@ import Highlight from 'react-highlight';
 var Home = React.createClass({
 
     getInitialState: function() {
-        var self = this;
-        var operator = operators.filter(function(o) {
-            return (o.name.split(' ').join('-') === self.props.params.operator);
+        const operator = operators.filter(o => {
+            return (o.name.split(' ').join('-') === this.props.params.operator);
         })[0];
 
         return {
@@ -19,8 +18,7 @@ var Home = React.createClass({
     },
 
     componentWillReceiveProps(nextProps) {
-        var self = this;
-        var operator = this.state.operators.filter(function(o) {
+        const operator = this.state.operators.filter( o => {
             return (o.name.split(' ').join('-') === nextProps.params.operator);
         })[0];
 
@@ -28,27 +26,18 @@ var Home = React.createClass({
             currentIndex: this.state.operators.indexOf(operator)
         });
     },
-
+    
     getCurrentOperator: function() {
-        if (this.state.operators !== undefined){
-            return this.state.operators[this.state.currentIndex];
-        } else {
-            return {name: "", symbol: ""}
-        }
+        let defaultOperator = {name: "", symbol: ""};
+        return (this.state.operators === undefined) ?
+            defaultOperator : this.state.operators[this.state.currentIndex];
     },
 
     showNextOperator: function() {
-        var nextIndex;
-        var self = this;
-        var isMaxIndex = function() {
-            return self.state.currentIndex === (self.state.operators.length - 1);
+        const isMaxIndex = () => {
+            return this.state.currentIndex === (this.state.operators.length - 1);
         }
-
-        if (isMaxIndex()){
-            nextIndex = 0;
-        } else {
-            nextIndex = this.state.currentIndex + 1;
-        }
+        const nextIndex = isMaxIndex() ? 0 : this.state.currentIndex + 1;
         hashHistory.push(this.state.operators[nextIndex].name.split(' ').join('-'))
     },
 
