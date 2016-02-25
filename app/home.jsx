@@ -7,7 +7,7 @@ import Highlight from 'react-highlight';
 var Home = React.createClass({
 
     getInitialState: function() {
-        var operator = operators.filter(o => {
+        const operator = operators.filter(o => {
             return (o.name.split(' ').join('-') === this.props.params.operator);
         })[0];
 
@@ -18,7 +18,7 @@ var Home = React.createClass({
     },
 
     componentWillReceiveProps(nextProps) {
-        var operator = this.state.operators.filter( o => {
+        const operator = this.state.operators.filter( o => {
             return (o.name.split(' ').join('-') === nextProps.params.operator);
         })[0];
 
@@ -26,7 +26,7 @@ var Home = React.createClass({
             currentIndex: this.state.operators.indexOf(operator)
         });
     },
-
+    
     getCurrentOperator: function() {
         let defaultOperator = {name: "", symbol: ""};
         return (this.state.operators === undefined) ?
@@ -34,10 +34,10 @@ var Home = React.createClass({
     },
 
     showNextOperator: function() {
-        var isMaxIndex = () => {
+        const isMaxIndex = () => {
             return this.state.currentIndex === (this.state.operators.length - 1);
         }
-        var nextIndex = isMaxIndex() ? 0 : this.state.currentIndex + 1;
+        const nextIndex = isMaxIndex() ? 0 : this.state.currentIndex + 1;
         hashHistory.push(this.state.operators[nextIndex].name.split(' ').join('-'))
     },
 
