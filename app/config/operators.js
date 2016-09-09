@@ -1,5 +1,10 @@
 module.exports = [
     {
+        "name": "rose memoization",
+        "symbol": "@ ||=",
+        "example": "#\“Memoization\” is caching the results of expensive method calls to prevent running expensive calls if a value already exists\ndef my_expensive_method\n  @my_expensive_method ||= one + two * three\nend\n#or\ndef my_expensive_method\n  @my_expensive_method ||= begin\n    one\n    two\n    three\n  end\nend"
+    },
+    {
         "name": "hashrocket",
         "symbol": "=>",
         "example": "# pre-Ruby 1.9 syntax for assigning values to keys in a map\nx = { :a => 'foo', :b => 'bar' }\n# => {:a=>\"foo\", :b=>\"bar\"}\n\n# This is now the same as (using ':' instead of '=>')\nx = { a: 'foo', b: 'bar' }\n# => {:a=>\"foo\", :b=>\"bar\"}"
