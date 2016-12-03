@@ -23,7 +23,7 @@ var Sidebar = React.createClass({
 
     render: function() {
         return (
-            <div className="col-sm-3 col-md-2 sidebar">
+            <div className="col-sm-3 col-md-3 sidebar">
                 <ul className="nav nav-sidebar">
                     {this.props.operators.map(this.displayOperator)}
                 </ul>
