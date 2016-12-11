@@ -1,9 +1,13 @@
 module Main exposing (..)
 
 import Html exposing (..)
+import Html.Attributes exposing (..)
+import Html.Events exposing (..)
+import Http
+import Json.Decode as Decode
 
 
--- Model
+-- model
 
 
 type alias Operator =
@@ -12,37 +16,74 @@ type alias Operator =
     }
 
 
-initOperator : Operator
-initOperator =
+type alias Operators =
+    List Operator
+
+
+type alias Model =
+    { operators : Operators
+    , currentOperator : Operator
+    }
+
+
+operator : Operator
+operator =
     { name = "Spaceship"
     , symbol = "<=>"
     }
 
 
+operators : List Operator
+operators =
+    [ operator, operator, operator, operator ]
 
--- Update
+
+model : Model
+model =
+    { operators = operators
+    , currentOperator = operator
+    }
+
+
+
+-- msg
 
 
 type Msg
     = Show
 
 
-update : Msg -> Operator -> Operator
-update msg operator =
+-- update
+
+update : Msg -> Model -> Model
+update msg model =
     case msg of
         Show ->
+        Debug.log "sweet"
+            getOperator
             operator
+            model
+
+-- functions
 
 
-view : Operator -> Html Msg
-view operator =
-    div [] [ text (toString operator) ]
+getOperator : Operator -> Model -> Model
+getOperator operator model =
+    model
 
 
-main : Program Never Operator Msg
+-- view
+
+
+view : Model -> Html Msg
+view model =
+    ul []
+        (List.map (\l -> li [ onClick Show ] [ text l.name ]) model.operators)
+
+
 main =
-    Html.beginnerProgram
-        { model = initOperator
+    beginnerProgram
+        { model = model
         , update = update
         , view = view
         }
