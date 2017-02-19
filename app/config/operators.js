@@ -74,7 +74,7 @@ module.exports = [
         "symbol": "[]"
     },
     {
-        "name": "elvis",
+        "name": "ternary",
         "symbol": "?:",
         "example": "# ternary operator: evaluate an expression and return one of two values based on the outcome\ndef portugal_soccer_result(is_ronaldo_playing)\n  is_ronaldo_playing ? 'wins :-)' : 'loses :-('\nend\n\np portugal_soccer_result(true)\n# => \"wins :-)\""
     },
