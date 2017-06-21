@@ -108,7 +108,7 @@ module.exports = [
     {
         "name": "flip-flop",
         "symbol": "( == )..( == )",
-        "example": "# Flip-Flop operator \n(1..20).each do |x|\n   puts x if (x == 5) .. (x == 10)\nend\n\n# Prints\n1\n2\n3\n4\n5"
+        "example": "# Flip-Flop operator \n(1..20).each do |x|\n   puts x if (x == 5) .. (x == 10)\nend\n\n# Prints\n5\n6\n7\n8\n9\n10"
     },    
     {
         "name": "blank",
