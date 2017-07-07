@@ -21,7 +21,8 @@ module.exports = [
     },
     {
         "name": "twiddle wakka",
-        "symbol": "~>"
+        "symbol": "~>",
+        "example": "gem 'rails', '~> 5'"
     },
     {
         "name": "stabby lambda",
