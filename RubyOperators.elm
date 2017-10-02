@@ -1,12 +1,13 @@
 module RubyOperators exposing (..)
 
 import Html exposing (..)
-import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Json.Encode exposing (string)
-import Html.Attributes exposing (property)
+import Html.Attributes exposing (property, id, class)
 import Http
-import Json.Decode as Decode exposing (Decoder, field, decodeString)
+import Json.Encode exposing (..)
+import Json.Decode exposing (..)
+import Json.Decode.Pipeline exposing (..)
+import Highlight exposing (check, processedOutput)
 
 
 operatorsUrl : String
@@ -21,6 +22,7 @@ operatorsUrl =
 type alias Operator =
     { name : String
     , symbol : String
+    , example : String
     }
 
 
@@ -44,7 +46,7 @@ initialModel =
 
 httpGet : (Result Http.Error (List Operator) -> msg) -> Cmd msg
 httpGet msg =
-    Decode.list operatorDecoder
+    Json.Decode.list operatorDecoder
         |> Http.get operatorsUrl
         |> Http.send msg
 
@@ -61,6 +63,7 @@ getOperators =
 type Msg
     = Show Operator
     | FillOperators (Result Http.Error (List Operator))
+    | RenderExample String
 
 
 
@@ -71,13 +74,16 @@ update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         Show operator ->
-            ( { model | currentOperator = Maybe.Just operator }, Cmd.none )
+            ( { model | currentOperator = Just operator }, check operator.example )
 
         FillOperators (Ok allOperators) ->
             ( { model | operators = allOperators, currentOperator = List.head (allOperators) }, Cmd.none )
 
         FillOperators (Err error) ->
             ( model, Cmd.none )
+
+        RenderExample highlightedCodeExample ->
+            ( { model | currentOperator = Maybe.map (\operator -> { operator | example = highlightedCodeExample }) model.currentOperator }, Cmd.none )
 
 
 
@@ -90,7 +96,7 @@ viewOperatorLi operator =
         [ span []
             [ text operator.name
             ]
-        , span [ property "innerHTML" (string "&nbsp;") ]
+        , span [ property "innerHTML" (Json.Encode.string "&nbsp;") ]
             []
         , span [ class "operator_mini" ]
             [ text "=>" ]
@@ -114,6 +120,18 @@ viewHeader =
         [ text "Ruby Operators" ]
 
 
+viewCodeExample : String -> Html msg
+viewCodeExample example =
+    if (String.isEmpty example == False) then
+        pre []
+            [ code
+                [ property "innerHTML" (Json.Encode.string example) ]
+                []
+            ]
+    else
+        span [] []
+
+
 viewOperator : Maybe Operator -> Html msg
 viewOperator currentOperator =
     case currentOperator of
@@ -121,7 +139,7 @@ viewOperator currentOperator =
             div [ class "wrapper" ]
                 [ div [ class "operator" ] [ (text operator.symbol) ]
                 , div [ class "operator_name" ] [ (text operator.name) ]
-                , div [] []
+                , viewCodeExample operator.example
                 ]
 
         Nothing ->
@@ -151,15 +169,22 @@ view model =
 
 operatorDecoder : Decoder Operator
 operatorDecoder =
-    Decode.map2 Operator
-        (field "name" Decode.string)
-        (field "symbol" Decode.string)
+    decode Operator
+        |> required "name" Json.Decode.string
+        |> required "symbol" Json.Decode.string
+        |> optional "example" Json.Decode.string ""
 
 
+subscriptions : Model -> Sub Msg
+subscriptions model =
+    processedOutput RenderExample
+
+
+main : Program Never Model Msg
 main =
     program
         { init = ( initialModel, getOperators )
         , view = view
         , update = update
-        , subscriptions = (\_ -> Sub.none)
+        , subscriptions = subscriptions
         }
