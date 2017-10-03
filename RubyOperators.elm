@@ -1,12 +1,12 @@
 module RubyOperators exposing (..)
 
-import Html exposing (..)
-import Html.Events exposing (..)
+import Html exposing (Html, div, pre, code, program, li, span, text, ul, h1)
+import Html.Events exposing (onClick)
 import Html.Attributes exposing (property, id, class)
 import Http
-import Json.Encode exposing (..)
-import Json.Decode exposing (..)
-import Json.Decode.Pipeline exposing (..)
+import Json.Encode exposing (string)
+import Json.Decode exposing (Decoder, list)
+import Json.Decode.Pipeline exposing (decode, required, optional)
 import Highlight exposing (check, processedOutput)
 
 
@@ -53,7 +53,7 @@ httpGet msg =
 
 getOperators : Cmd Msg
 getOperators =
-    httpGet FillOperators
+    httpGet RenderOperators
 
 
 
@@ -62,8 +62,8 @@ getOperators =
 
 type Msg
     = Show Operator
-    | FillOperators (Result Http.Error (List Operator))
-    | RenderExample String
+    | RenderOperators (Result Http.Error (List Operator))
+    | RenderCodeExample String
 
 
 
@@ -76,13 +76,13 @@ update msg model =
         Show operator ->
             ( { model | currentOperator = Just operator }, check operator.example )
 
-        FillOperators (Ok allOperators) ->
+        RenderOperators (Ok allOperators) ->
             ( { model | operators = allOperators, currentOperator = List.head (allOperators) }, Cmd.none )
 
-        FillOperators (Err error) ->
+        RenderOperators (Err error) ->
             ( model, Cmd.none )
 
-        RenderExample highlightedCodeExample ->
+        RenderCodeExample highlightedCodeExample ->
             ( { model | currentOperator = Maybe.map (\operator -> { operator | example = highlightedCodeExample }) model.currentOperator }, Cmd.none )
 
 
@@ -99,7 +99,7 @@ viewOperatorLi operator =
         , span [ property "innerHTML" (Json.Encode.string "&nbsp;") ]
             []
         , span [ class "operator_mini" ]
-            [ text "=>" ]
+            [ text operator.symbol ]
         ]
 
 
@@ -177,7 +177,7 @@ operatorDecoder =
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-    processedOutput RenderExample
+    processedOutput RenderCodeExample
 
 
 main : Program Never Model Msg
