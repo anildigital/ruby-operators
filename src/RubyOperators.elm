@@ -8,6 +8,7 @@ import Json.Encode exposing (string)
 import Json.Decode exposing (Decoder, list)
 import Json.Decode.Pipeline exposing (decode, required, optional)
 import Highlight exposing (check, processedOutput)
+import Navigation exposing (Location)
 
 
 operatorsUrl : String
@@ -26,8 +27,8 @@ type alias Operator =
     }
 
 
-operators : List Operator
-operators =
+initialOperators : List Operator
+initialOperators =
     []
 
 
@@ -37,10 +38,15 @@ type alias Model =
     }
 
 
+init : Location -> ( Model, Cmd Msg )
+init location =
+    ( initialModel, getOperators location )
+
+
 initialModel : Model
 initialModel =
-    { operators = operators
-    , currentOperator = List.head (operators)
+    { operators = initialOperators
+    , currentOperator = List.head (initialOperators)
     }
 
 
@@ -51,8 +57,8 @@ httpGet msg =
         |> Http.send msg
 
 
-getOperators : Cmd Msg
-getOperators =
+getOperators : Location -> Cmd Msg
+getOperators location =
     httpGet RenderOperators
 
 
@@ -64,6 +70,34 @@ type Msg
     = Show Operator
     | RenderOperators (Result Http.Error (List Operator))
     | RenderCodeExample String
+    | UrlChange Navigation.Location
+
+
+isCurrentOperator : Location -> Operator -> Bool
+isCurrentOperator location operator =
+    (String.dropLeft 1 location.pathname) == (String.join "_" (String.split " " operator.name))
+
+
+getOperator : Location -> List Operator -> Maybe Operator
+getOperator newLocation operators =
+    (List.head (List.filter (isCurrentOperator newLocation) operators))
+
+
+highlightExample : Model -> ( Model, Cmd Msg )
+highlightExample model =
+    ( model
+    , Maybe.map (\operator -> check operator.example) model.currentOperator |> Maybe.withDefault Cmd.none
+    )
+
+
+navigateTo : Model -> ( Model, Cmd msg )
+navigateTo model =
+    case model.currentOperator of
+        Just operator ->
+            ( model, Navigation.newUrl (String.join "_" (String.split " " operator.name)) )
+
+        Nothing ->
+            ( model, Cmd.none )
 
 
 
@@ -73,15 +107,22 @@ type Msg
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
+        UrlChange newLocation ->
+            { model | currentOperator = (getOperator newLocation model.operators) } |> highlightExample
+
         Show operator ->
-            ( { model | currentOperator = Just operator }, check operator.example )
+            ({ model | currentOperator = Just operator }) |> navigateTo
 
         RenderOperators (Ok allOperators) ->
-            ( { model | operators = allOperators, currentOperator = List.head (allOperators) }, Cmd.none )
+            ({ model | operators = allOperators, currentOperator = List.head (allOperators) }) |> navigateTo
 
+        -- ( model
+        -- , Maybe.map (\operator -> navigateTo (operator)) model.currentOperator |> Maybe.withDefault Cmd.none
+        -- )
         RenderOperators (Err error) ->
             ( model, Cmd.none )
 
+        -- Called back from the subscriber to render it properly
         RenderCodeExample highlightedCodeExample ->
             ( { model | currentOperator = Maybe.map (\operator -> { operator | example = highlightedCodeExample }) model.currentOperator }, Cmd.none )
 
@@ -182,8 +223,8 @@ subscriptions model =
 
 main : Program Never Model Msg
 main =
-    program
-        { init = ( initialModel, getOperators )
+    Navigation.program UrlChange
+        { init = init
         , view = view
         , update = update
         , subscriptions = subscriptions
