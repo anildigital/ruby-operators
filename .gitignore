@@ -1,6 +1,5 @@
 .tern-port
 node_modules
-build
 npm-debug.log
 bundle.js
 .tags

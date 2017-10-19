@@ -59,7 +59,7 @@ httpGet msg =
 
 getOperators : Location -> Cmd Msg
 getOperators location =
-    httpGet RenderOperators
+    httpGet (RenderOperators location)
 
 
 
@@ -68,7 +68,7 @@ getOperators location =
 
 type Msg
     = Show Operator
-    | RenderOperators (Result Http.Error (List Operator))
+    | RenderOperators Location (Result Http.Error (List Operator))
     | RenderCodeExample String
     | UrlChange Navigation.Location
 
@@ -80,7 +80,12 @@ isCurrentOperator location operator =
 
 getOperator : Location -> List Operator -> Maybe Operator
 getOperator newLocation operators =
-    (List.head (List.filter (isCurrentOperator newLocation) operators))
+    case newLocation.pathname of
+        "/" ->
+            List.head (operators)
+
+        pathname ->
+            (List.head (List.filter (isCurrentOperator newLocation) operators))
 
 
 highlightExample : Model -> ( Model, Cmd Msg )
@@ -113,13 +118,14 @@ update msg model =
         Show operator ->
             ({ model | currentOperator = Just operator }) |> navigateTo
 
-        RenderOperators (Ok allOperators) ->
-            ({ model | operators = allOperators, currentOperator = List.head (allOperators) }) |> navigateTo
+        RenderOperators location (Ok allOperators) ->
+            ({ model | operators = allOperators, currentOperator = getOperator location allOperators })
+                |> navigateTo
 
         -- ( model
         -- , Maybe.map (\operator -> navigateTo (operator)) model.currentOperator |> Maybe.withDefault Cmd.none
         -- )
-        RenderOperators (Err error) ->
+        RenderOperators location (Err error) ->
             ( model, Cmd.none )
 
         -- Called back from the subscriber to render it properly

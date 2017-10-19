@@ -2,12 +2,9 @@
   "name": "Ruby Operators",
   "repository": "https://github.com/anildigital/ruby-operators",
   "env": {
-      "ELM_COMPILE": "elm make RubyOperators.elm --output ruby-operators.js"
+        "ELM_COMPILE": ""
   },
   "buildpacks": [
-      {
-          "url": "https://github.com/srid/heroku-buildpack-elm.git"
-      },
       {
           "url": "https://github.com/hone/heroku-buildpack-static"
       }
