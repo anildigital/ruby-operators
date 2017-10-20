@@ -62,17 +62,6 @@ getOperators location =
     httpGet (RenderOperators location)
 
 
-
--- msg
-
-
-type Msg
-    = Show Operator
-    | RenderOperators Location (Result Http.Error (List Operator))
-    | RenderCodeExample String
-    | UrlChange Navigation.Location
-
-
 isCurrentOperator : Location -> Operator -> Bool
 isCurrentOperator location operator =
     (String.dropLeft 1 location.pathname) == (String.join "_" (String.split " " operator.name))
@@ -103,6 +92,17 @@ navigateTo model =
 
         Nothing ->
             ( model, Cmd.none )
+
+
+
+-- msg
+
+
+type Msg
+    = Show Operator
+    | RenderOperators Location (Result Http.Error (List Operator))
+    | RenderCodeExample String
+    | UrlChange Navigation.Location
 
 
 
@@ -137,9 +137,27 @@ update msg model =
 -- view
 
 
-viewOperatorLi : Operator -> Html Msg
-viewOperatorLi operator =
-    li [ class "", onClick (Show operator) ]
+viewOperatorList : Model -> List Operator -> List (Html Msg)
+viewOperatorList model operators =
+    List.map (viewOperatorLi model) operators
+
+
+isItemSelected : Model -> Operator -> String
+isItemSelected model operator =
+    case model.currentOperator of
+        Just currentOperator ->
+            if currentOperator.name == operator.name then
+                "active"
+            else
+                ""
+
+        Nothing ->
+            ""
+
+
+viewOperatorLi : Model -> Operator -> Html Msg
+viewOperatorLi model operator =
+    li [ class (isItemSelected model operator), onClick (Show operator) ]
         [ span []
             [ text operator.name
             ]
@@ -150,12 +168,12 @@ viewOperatorLi operator =
         ]
 
 
-viewSidebar : List Operator -> Html Msg
-viewSidebar operators =
+viewSidebar : Model -> List Operator -> Html Msg
+viewSidebar model operators =
     div [ class "col-sm-3 col-md-3 sidebar" ]
         [ ul [ class "nav nav-sidebar" ]
-            (List.map
-                viewOperatorLi
+            (viewOperatorList
+                model
                 operators
             )
         ]
@@ -207,7 +225,7 @@ view model =
         [ div
             []
             [ div [ class "row" ]
-                [ viewSidebar model.operators
+                [ viewSidebar model model.operators
                 , viewMain model.currentOperator
                 ]
             ]
