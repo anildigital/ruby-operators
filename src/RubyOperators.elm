@@ -94,12 +94,36 @@ navigateTo model =
             ( model, Cmd.none )
 
 
+getNextOperator : List Operator -> Operator -> Maybe Operator
+getNextOperator list currentOperator =
+    let
+        findNextInList l =
+            case l of
+                [] ->
+                    Nothing
+
+                x :: [] ->
+                    if x.name == currentOperator.name then
+                        List.head list
+                    else
+                        Nothing
+
+                x :: y :: rest ->
+                    if x.name == currentOperator.name then
+                        Just y
+                    else
+                        findNextInList (y :: rest)
+    in
+        findNextInList list
+
+
 
 -- msg
 
 
 type Msg
     = Show Operator
+    | ShowNext Operator
     | RenderOperators Location (Result Http.Error (List Operator))
     | RenderCodeExample String
     | UrlChange Navigation.Location
@@ -117,6 +141,9 @@ update msg model =
 
         Show operator ->
             ({ model | currentOperator = Just operator }) |> navigateTo
+
+        ShowNext operator ->
+            ({ model | currentOperator = (getNextOperator model.operators operator) }) |> navigateTo
 
         RenderOperators location (Ok allOperators) ->
             ({ model | operators = allOperators, currentOperator = getOperator location allOperators })
@@ -197,11 +224,11 @@ viewCodeExample example =
         span [] []
 
 
-viewOperator : Maybe Operator -> Html msg
+viewOperator : Maybe Operator -> Html Msg
 viewOperator currentOperator =
     case currentOperator of
         Just operator ->
-            div [ class "wrapper" ]
+            div [ class "wrapper", onClick (ShowNext operator) ]
                 [ div [ class "operator" ] [ (text operator.symbol) ]
                 , div [ class "operator_name" ] [ (text operator.name) ]
                 , viewCodeExample operator.example
@@ -211,7 +238,7 @@ viewOperator currentOperator =
             div [] []
 
 
-viewMain : Maybe Operator -> Html msg
+viewMain : Maybe Operator -> Html Msg
 viewMain currentOperator =
     div [ class "col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main" ]
         [ viewHeader
