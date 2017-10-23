@@ -40,6 +40,10 @@ img {
     border-right: 1px solid #eee;
   }
 
+  .mobile-header{
+      display: none;
+  }
+
   .fork_me {
     display:block;
   }
@@ -88,8 +92,19 @@ img {
     padding-left: 40px;
   }
 }
-.main .page-header {
-  margin-top: 0;
+
+.sidebar .page-header {
+  margin-top: 0px;
+}
+
+@media (max-width: 768px) {
+    .main .page-header {
+        margin:5px 0px 20px;
+    }
+    .mobile-header{
+        display: block;
+        margin-bottom: 10px;
+    }
 }
 
 pre {

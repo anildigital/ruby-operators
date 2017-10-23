@@ -198,7 +198,8 @@ viewOperatorLi model operator =
 viewSidebar : Model -> List Operator -> Html Msg
 viewSidebar model operators =
     div [ class "col-sm-3 col-md-3 sidebar" ]
-        [ ul [ class "nav nav-sidebar" ]
+        [ viewHeader
+        , ul [ class "nav nav-sidebar" ]
             (viewOperatorList
                 model
                 operators
@@ -210,6 +211,17 @@ viewHeader : Html msg
 viewHeader =
     h1 [ class "page-header" ]
         [ text "Ruby Operators" ]
+
+
+viewMobileHeader : Html msg
+viewMobileHeader =
+    div [ class "mobile-header" ]
+        [ h1 [ class "page-header" ]
+            [ text "Ruby Operators" ]
+        , div
+            [ class "text-center alert alert-info" ]
+            [ text "Tap to see next Ruby operator" ]
+        ]
 
 
 viewCodeExample : String -> Html msg
@@ -241,8 +253,9 @@ viewOperator currentOperator =
 viewMain : Maybe Operator -> Html Msg
 viewMain currentOperator =
     div [ class "col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main" ]
-        [ viewHeader
-        , viewOperator currentOperator
+        [ viewMobileHeader
+        , viewOperator
+            currentOperator
         ]
 
 
