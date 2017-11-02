@@ -219,8 +219,8 @@ viewMobileHeader =
         [ h1 [ class "page-header" ]
             [ text "Ruby Operators" ]
         , div
-            [ class "text-center alert alert-info" ]
-            [ text "Tap to see next Ruby operator" ]
+            [ class "text-center alert alert-success" ]
+            [ text "Tap Ruby operator to see the next one" ]
         ]
 
 
